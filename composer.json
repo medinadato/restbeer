@@ -1,0 +1,12 @@
+{
+    "minimum-stability": "dev",
+    "require": {
+        "silex/silex": "1.0.*",
+        "monolog/monolog": "*",
+        "sybio/image-workshop": "*",
+        "doctrine/dbal":"2.2.*",
+        "twig/twig":"*",
+        "symfony/twig-bridge":"*"
+    }
+}
+
