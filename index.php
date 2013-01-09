@@ -3,6 +3,10 @@
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Silex\Provider\DoctrineServiceProvider;
+use Silex\Provider\MonologServiceProvider;
+use Silex\Provider\TwigServiceProvider;
+use Silex\Provider\SwiftmailerServiceProvider;
 
 //Composer loader
 $loader = require_once __DIR__ . '/vendor/autoload.php';
@@ -10,17 +14,37 @@ $loader = require_once __DIR__ . '/vendor/autoload.php';
 // new application
 $app = new Application();
 
-$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
+// debug 
+$app['debug'] = true;
+// timezone
+date_default_timezone_set('Australia/Melbourne');
+
+$app->register(new DoctrineServiceProvider(), array(
     'db.options' => array(
         'driver' => 'pdo_sqlite',
         'path' => __DIR__ . '/app.db',
     )
 ));
 
-// debug 
-$app['debug'] = true;
 // logger
 //$app['db']->getConfiguration()->setSQLLogger(new Doctrine\DBAL\Logging\EchoSQLLogger());
+
+$app->register(new MonologServiceProvider, array(
+    'monolog.logfile' => __DIR__ . '/logs/app.log',
+));
+
+if ($app['debug']) {
+//    $app['monolog']->addInfo('Testing');
+//    $app['monolog']->addDebug('Debuging file foo');
+//    $app['monolog']->addWarning('Warning parameter');
+//    $app['monolog']->addError('Class foo not found');
+}
+
+$app->redirect(new TwigServiceProvider, array(
+    'twig.path' => __DIR__.'/app/views',
+));
+
+$app->register(new SwiftmailerServiceProvider());
 
 /**
  * Search
@@ -45,7 +69,6 @@ $app->get('/beers/{id}', function($id) use ($app) {
 
             return new Response(json_encode($beer), 200);
         })->value('id', null);
-
 
 /**
  * Insert
@@ -123,6 +146,37 @@ $app->delete('/beers/{id}', function (Request $request, $id) use ($app) {
 /**
  * 
  */
+$app->get('/styles', function() use ($app) {
+    return new Response('Beer Deleted', 200);
+//            $sql = "SELECT * FROM style";
+//            $styles = $app['db']->fetchAll($sql);
+//
+//            if (!$styles)
+//                return new Response('No styles found', 404);
+//
+//            return $app['twig']->render('styles.xml.twig', array(
+//                'styles' => $styles,
+//            ));
+        });
+
+/**
+ * 
+ */
+$app->get('/post', function() use ($app) {
+            $message = \Swift_Message::newInstance()
+                    ->setSubject('teste')
+                    ->setFrom('medinadato@gmail.com')
+                    ->setTo('medinadato@hotmail.com')
+                    ->setBody('this is a body message');
+
+            $app['mailler']->send($message);
+
+            return new Response('Tks for your feedback', 201);
+        });
+
+/**
+ * 
+ */
 $app->before(function (Request $request) use ($app) {
 //            if (!$request->headers->has('authorization')) {
 //                return new Response('Unauthorized', 401);
@@ -137,20 +191,25 @@ $app->before(function (Request $request) use ($app) {
  * 
  */
 $app->after(function(Request $request, Response $response) {
-            $response->headers->set('Content-type', 'text/json');
+//            $response->headers->set('Content-type', 'text/json');
         });
-        
+
 /**
  * 
  */
-$app->get('/styles', function() use ($app) {
-            $sql = "SELECT * FROM style";
-            $styles = $app['db']->fetchAll($sql);
-            
-            if(!$styles)
-                return new Response('No styles found', 404);
-            
-            return new Response(json_encode($styles), 200);
+$app->error(function (\Exception $e, $code) {
+//            switch ($code) {
+//                case 400:
+//                    $message = 'Bad Request';
+//                    break;
+//                case 404:
+//                    $message = 'Page not found';
+//                    break;
+//                default:
+//                    $message = 'Internal Server Error.';
+//            }
+//            
+//            return new Response($message, $code);
         });
 
 /**
