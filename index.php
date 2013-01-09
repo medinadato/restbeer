@@ -40,8 +40,8 @@ if ($app['debug']) {
 //    $app['monolog']->addError('Class foo not found');
 }
 
-$app->redirect(new TwigServiceProvider, array(
-    'twig.path' => __DIR__.'/app/views',
+$app->register(new TwigServiceProvider(), array(
+    'twig.path' => __DIR__ . '/app/views',
 ));
 
 $app->register(new SwiftmailerServiceProvider());
@@ -147,29 +147,29 @@ $app->delete('/beers/{id}', function (Request $request, $id) use ($app) {
  * 
  */
 $app->get('/styles', function() use ($app) {
-    return new Response('Beer Deleted', 200);
-//            $sql = "SELECT * FROM style";
-//            $styles = $app['db']->fetchAll($sql);
-//
-//            if (!$styles)
-//                return new Response('No styles found', 404);
-//
-//            return $app['twig']->render('styles.xml.twig', array(
-//                'styles' => $styles,
-//            ));
+
+            $sql = "SELECT * FROM style";
+            $styles = $app['db']->fetchAll($sql);
+
+            if (!$styles)
+                return new Response('No styles found', 404);
+
+            return $app['twig']->render('styles.xml.twig', array(
+                        'styles' => $styles,
+                    ));
         });
 
 /**
  * 
  */
-$app->get('/post', function() use ($app) {
+$app->get('/mail', function() use ($app) {
             $message = \Swift_Message::newInstance()
                     ->setSubject('teste')
                     ->setFrom('medinadato@gmail.com')
                     ->setTo('medinadato@hotmail.com')
                     ->setBody('this is a body message');
 
-            $app['mailler']->send($message);
+            $app['mailer']->send($message);
 
             return new Response('Tks for your feedback', 201);
         });
@@ -191,7 +191,7 @@ $app->before(function (Request $request) use ($app) {
  * 
  */
 $app->after(function(Request $request, Response $response) {
-//            $response->headers->set('Content-type', 'text/json');
+//            $response->headers->set('Content-type', 'text/xml');
         });
 
 /**
