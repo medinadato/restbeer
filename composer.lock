@@ -1,5 +1,5 @@
 {
-    "hash": "9f0be5cde38e19e5116d28353eb69bb4",
+    "hash": "154913b53e0d4c5b87e1725241330945",
     "packages": [
         {
             "name": "doctrine/common",
@@ -131,12 +131,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog",
-                "reference": "39e8151a93bc136026ae965bd08b8a230115c6a6"
+                "reference": "1.3.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Seldaek/monolog/archive/39e8151a93bc136026ae965bd08b8a230115c6a6.zip",
-                "reference": "39e8151a93bc136026ae965bd08b8a230115c6a6",
+                "url": "https://github.com/Seldaek/monolog/archive/1.3.0.zip",
+                "reference": "1.3.0",
                 "shasum": ""
             },
             "require": {
@@ -145,15 +145,17 @@
             },
             "require-dev": {
                 "mlehner/gelf-php": "1.0.*",
-                "doctrine/couchdb": "dev-master"
+                "doctrine/couchdb": "dev-master",
+                "raven/raven": "0.3.*"
             },
             "suggest": {
                 "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server",
                 "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
                 "ext-mongo": "Allow sending log messages to a MongoDB server",
-                "doctrine/couchdb": "Allow sending log messages to a CouchDB server"
+                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+                "raven/raven": "Allow sending log messages to a Sentry server"
             },
-            "time": "2013-01-06 20:47:20",
+            "time": "2013-01-07 20:26:46",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -178,11 +180,12 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Logging for PHP 5.3",
+            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
             "homepage": "http://github.com/Seldaek/monolog",
             "keywords": [
                 "log",
-                "logging"
+                "logging",
+                "psr-3"
             ]
         },
         {
@@ -191,18 +194,18 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Pimple.git",
-                "reference": "f145dc796b76635e5419354e6d7dce4d6c8cd04d"
+                "reference": "d58cec632dfdd3305d6b4f2563a5cf2a75b4d978"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Pimple/archive/f145dc796b76635e5419354e6d7dce4d6c8cd04d.zip",
-                "reference": "f145dc796b76635e5419354e6d7dce4d6c8cd04d",
+                "url": "https://github.com/fabpot/Pimple/archive/d58cec632dfdd3305d6b4f2563a5cf2a75b4d978.zip",
+                "reference": "d58cec632dfdd3305d6b4f2563a5cf2a75b4d978",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2013-01-04 16:53:43",
+            "time": "2013-01-07 10:39:26",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -352,6 +355,56 @@
             ]
         },
         {
+            "name": "swiftmailer/swiftmailer",
+            "version": "v4.1.8",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/swiftmailer/swiftmailer.git",
+                "reference": "v4.1.8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/swiftmailer/swiftmailer/zipball/v4.1.8",
+                "reference": "v4.1.8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "time": "2012-06-17 13:55:34",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "lib/swift_required.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Chris Corbyn"
+                }
+            ],
+            "description": "Swiftmailer, free feature-rich PHP mailer",
+            "homepage": "http://swiftmailer.org",
+            "keywords": [
+                "mail",
+                "mailer"
+            ]
+        },
+        {
             "name": "sybio/image-workshop",
             "version": "dev-master",
             "source": {
@@ -408,12 +461,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher",
-                "reference": "0fcc9fa82fa3ea7ec2605af2e8137698fbaca3dc"
+                "reference": "v2.2.0-BETA1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/EventDispatcher/archive/0fcc9fa82fa3ea7ec2605af2e8137698fbaca3dc.zip",
-                "reference": "0fcc9fa82fa3ea7ec2605af2e8137698fbaca3dc",
+                "url": "https://github.com/symfony/EventDispatcher/archive/v2.2.0-BETA1.zip",
+                "reference": "v2.2.0-BETA1",
                 "shasum": ""
             },
             "require": {
@@ -463,18 +516,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpFoundation",
-                "reference": "94049fb6ab83ef7432f652f40f6ee18618e4a05c"
+                "reference": "v2.2.0-BETA1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/HttpFoundation/archive/94049fb6ab83ef7432f652f40f6ee18618e4a05c.zip",
-                "reference": "94049fb6ab83ef7432f652f40f6ee18618e4a05c",
+                "url": "https://github.com/symfony/HttpFoundation/archive/v2.2.0-BETA1.zip",
+                "reference": "v2.2.0-BETA1",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2013-01-05 17:52:40",
+            "time": "2013-01-08 18:17:41",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -514,12 +567,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpKernel",
-                "reference": "6e8e03641edeb6401bba6dfbe2b7608e116fd3fb"
+                "reference": "v2.2.0-BETA1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/HttpKernel/archive/6e8e03641edeb6401bba6dfbe2b7608e116fd3fb.zip",
-                "reference": "6e8e03641edeb6401bba6dfbe2b7608e116fd3fb",
+                "url": "https://github.com/symfony/HttpKernel/archive/v2.2.0-BETA1.zip",
+                "reference": "v2.2.0-BETA1",
                 "shasum": ""
             },
             "require": {
@@ -546,7 +599,7 @@
                 "symfony/dependency-injection": "2.2.*",
                 "symfony/finder": "2.2.*"
             },
-            "time": "2013-01-05 17:52:40",
+            "time": "2013-01-08 18:55:25",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -583,12 +636,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Routing",
-                "reference": "87a66890450658ccac99702ac5e4f002ece9e23e"
+                "reference": "v2.2.0-BETA1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/Routing/archive/87a66890450658ccac99702ac5e4f002ece9e23e.zip",
-                "reference": "87a66890450658ccac99702ac5e4f002ece9e23e",
+                "url": "https://github.com/symfony/Routing/archive/v2.2.0-BETA1.zip",
+                "reference": "v2.2.0-BETA1",
                 "shasum": ""
             },
             "require": {
@@ -605,7 +658,7 @@
                 "symfony/config": "2.2.*",
                 "symfony/yaml": "2.2.*"
             },
-            "time": "2012-12-28 13:21:48",
+            "time": "2013-01-07 11:20:12",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -642,12 +695,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/TwigBridge",
-                "reference": "b1355842490219d0cd48d9fb0315623482487126"
+                "reference": "v2.2.0-BETA1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/TwigBridge/archive/b1355842490219d0cd48d9fb0315623482487126.zip",
-                "reference": "b1355842490219d0cd48d9fb0315623482487126",
+                "url": "https://github.com/symfony/TwigBridge/archive/v2.2.0-BETA1.zip",
+                "reference": "v2.2.0-BETA1",
                 "shasum": ""
             },
             "require": {
@@ -708,18 +761,18 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Twig.git",
-                "reference": "ddd4b732f9aa182edb54b89891c7fd25668354a4"
+                "reference": "3111e1265db1026323c589a5bd2d152871d7bbab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Twig/archive/ddd4b732f9aa182edb54b89891c7fd25668354a4.zip",
-                "reference": "ddd4b732f9aa182edb54b89891c7fd25668354a4",
+                "url": "https://github.com/fabpot/Twig/archive/3111e1265db1026323c589a5bd2d152871d7bbab.zip",
+                "reference": "3111e1265db1026323c589a5bd2d152871d7bbab",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "2013-01-05 10:14:46",
+            "time": "2013-01-08 16:56:12",
             "type": "library",
             "extra": {
                 "branch-alias": {

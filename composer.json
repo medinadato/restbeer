@@ -6,7 +6,8 @@
         "sybio/image-workshop": "*",
         "doctrine/dbal":"2.2.*",
         "twig/twig":"*",
-        "symfony/twig-bridge":"*"
+        "symfony/twig-bridge":"*",
+        "swiftmailer/swiftmailer": ">=4.1.2,<4.2-dev"
     }
 }
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<styles>
+{% for style in styles %}
+        <style>
+            <id>{{ style.id }}</id>
+            <name>{{ style.name }}</name>
+        </style>
+{% endfor %}
+</styles>
