@@ -7,6 +7,7 @@ use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\SwiftmailerServiceProvider;
+use Silex\Provider\SessionServiceProvider;
 
 //Composer loader
 $loader = require_once __DIR__ . '/vendor/autoload.php';
@@ -14,6 +15,10 @@ $loader = require_once __DIR__ . '/vendor/autoload.php';
 // new application
 $app = new Application();
 
+
+# ------------------------------------------------------------------------------
+# Registering
+# ------------------------------------------------------------------------------
 // debug 
 $app['debug'] = true;
 // timezone
@@ -44,7 +49,31 @@ $app->register(new TwigServiceProvider(), array(
     'twig.path' => __DIR__ . '/app/views',
 ));
 
-$app->register(new SwiftmailerServiceProvider());
+
+$app->register(new SwiftmailerServiceProvider(), array(
+    'swiftmailer.options' => array(
+        'host' => 'smtp.gmail.com',
+        'port' => 465,
+        'username' => 'contato@mdnsolutions.com',
+        'password' => '',
+        'encryption' => 'ssl',
+        'auth_mode' => 'login')
+));
+
+////Right we now need to set the transport to Spool.
+// 
+////Set the directory you want the spool to be in.
+//$app["swiftmailer.spool"] = new \Swift_FileSpool(__DIR__."/../spool");
+////Take a copy of the original transport, we'll need that later.
+//$app["swiftmailer.transport.original"] = $app["swiftmailer.transport"];
+////Create a spool transport
+//$app["swiftmailer.transport"] = new \Swift_Transport_SpoolTransport($app['swiftmailer.transport.eventdispatcher'], $app["swiftmailer.spool"]);
+
+$app->register(new SessionServiceProvider());
+
+# ------------------------------------------------------------------------------
+# Routing
+# ------------------------------------------------------------------------------
 
 /**
  * Search
@@ -57,6 +86,7 @@ $app->get('/beers/{id}', function($id) use ($app) {
                     WHERE b.style_id = s.id";
                 $beers = $app['db']->fetchAll($sql);
                 return new Response(json_encode($beers), 200);
+//                return $app->json($beers, 200); (The same)
             }
 
             $sql = "SELECT b.id, b.name, s.name AS style 
@@ -74,7 +104,6 @@ $app->get('/beers/{id}', function($id) use ($app) {
  * Insert
  */
 $app->post('/beers', function (Request $request) use ($app) {
-
             // get data
             if (!$data = $request->get('beer'))
                 return new Response('Missing parameters', 400);
@@ -190,7 +219,13 @@ $app->before(function (Request $request) use ($app) {
 /**
  * 
  */
-$app->after(function(Request $request, Response $response) {
+$app->after(function(Request $request, Response $response) use ($app) {
+//            if (!$views = $app['session']->get('views')) {
+//                $app['session']->set('views', 1);
+//            } else {
+//                $app['session']->set('views', ++$views);
+//            }
+            
 //            $response->headers->set('Content-type', 'text/xml');
         });
 
